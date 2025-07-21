@@ -1,0 +1,355 @@
+table mlb_boxscores_2025-07-05
+	lineageTag: 8b80e307-77cd-4bd6-8649-7d4b173456a1
+
+	measure 'Hits (H)' =
+			
+			SUM('mlb_boxscores_2025-07-05'[hits])
+		formatString: 0
+		lineageTag: 78dc68c5-6499-4871-b69d-72bb0afb4e43
+
+		extendedProperty MeasureTemplate =
+				{
+				  "version": 0,
+				  "daxTemplateName": "MathematicalAddition"
+				}
+
+		changedProperty = FormatString
+
+	measure 'Sum Batting Order' = SUM('mlb_boxscores_2025-07-05'[batting_order])
+		formatString: 0
+		lineageTag: a44848c7-cbf8-4211-9638-f0a0d147c76b
+
+	measure 'Sum Games Played' = SUM('mlb_boxscores_2025-07-05'[gamesPlayed])
+		formatString: 0
+		lineageTag: b819a3d4-9351-4f75-90f0-f0008e017a01
+
+	measure 'Sum Flyouts' = SUM('mlb_boxscores_2025-07-05'[flyouts])
+		formatString: 0
+		lineageTag: 1d5520e6-2d4c-4ced-b90a-86f3e372237f
+
+	measure 'Sum Ground Outs' = SUM('mlb_boxscores_2025-07-05'[groundOuts])
+		formatString: 0
+		lineageTag: 9a810c9a-e38c-4e41-9479-5c1a5e1640c0
+
+	measure 'Sum Airouts' = SUM('mlb_boxscores_2025-07-05'[airouts])
+		formatString: 0
+		lineageTag: c2199311-4aa6-4134-94a6-7ad2c363e194
+
+	measure 'Sum Runs' = SUM('mlb_boxscores_2025-07-05'[runs])
+		formatString: 0
+		lineageTag: 36dbaf95-4af7-4f04-9985-2d1f2d7a782d
+
+	measure 'Sum Doubles' = SUM('mlb_boxscores_2025-07-05'[doubles])
+		formatString: 0
+		lineageTag: f633aba4-8770-46fd-83ed-63581540cbb8
+
+	measure 'Sum Triples' = SUM('mlb_boxscores_2025-07-05'[triples])
+		formatString: 0
+		lineageTag: f73e4317-4c75-4e98-aa40-796ed924f773
+
+	measure 'Sum Home Runs' = SUM('mlb_boxscores_2025-07-05'[homeRuns])
+		formatString: 0
+		lineageTag: f2e1f42f-a141-4457-ad54-313634b79a0e
+
+	measure 'Sum Strike Outs' = SUM('mlb_boxscores_2025-07-05'[strikeOuts])
+		formatString: 0
+		lineageTag: 9e4ad7a9-9b4a-4ed2-8e7e-46fe892ec46d
+
+	measure 'Sum Base On Balls' = SUM('mlb_boxscores_2025-07-05'[baseOnBalls])
+		formatString: 0
+		lineageTag: d4c83493-6490-4576-bce3-8b744609404d
+
+	measure 'Sum Intentional Walks' = SUM('mlb_boxscores_2025-07-05'[intentionalWalks])
+		formatString: 0
+		lineageTag: 6769e5b6-3d4f-4cef-9dbd-595e7f1562f5
+
+	measure 'Sum Hits' = SUM('mlb_boxscores_2025-07-05'[hits])
+		formatString: 0
+		lineageTag: 6d862c1b-4f7a-4651-a6cd-0668d706d726
+
+	measure 'Sum Hit By Pitch' = SUM('mlb_boxscores_2025-07-05'[hitByPitch])
+		formatString: 0
+		lineageTag: 0a53529c-ea7c-42eb-943e-4d5249bcfa04
+
+	measure 'Sum At Bats' = SUM('mlb_boxscores_2025-07-05'[atBats])
+		formatString: 0
+		lineageTag: 77155177-0b54-4062-a6ff-d03715302f55
+
+	measure 'Sum Caught Stealing' = SUM('mlb_boxscores_2025-07-05'[caughtStealing])
+		formatString: 0
+		lineageTag: bd32c97a-42bf-486f-bc8f-a11c20e0c7bb
+
+	measure 'Sum Stolen Bases' = SUM('mlb_boxscores_2025-07-05'[stolenBases])
+		formatString: 0
+		lineageTag: 1f079f29-8aae-4a01-86db-8c2f941cfc43
+
+	measure 'Sum Plate Appearances' = SUM('mlb_boxscores_2025-07-05'[plateAppearances])
+		formatString: 0
+		lineageTag: a2e401cd-52c7-4910-919a-897367ada167
+
+	measure 'Sum Left On Base' = SUM('mlb_boxscores_2025-07-05'[leftOnBase])
+		formatString: 0
+		lineageTag: 6a3cceba-9031-47b1-92b0-f0f088aa017d
+
+	measure 'Sum Total Bases' = SUM('mlb_boxscores_2025-07-05'[totalBases])
+		formatString: 0
+		lineageTag: da58bff7-3236-4ad7-83f6-fb8c2d189a0b
+
+	measure 'Sum RBI' = SUM('mlb_boxscores_2025-07-05'[rbi])
+		formatString: 0
+		lineageTag: a575223b-75f4-41c8-b830-6c709832584f
+
+	column team
+		dataType: int64
+		formatString: 0
+		lineageTag: 7ef40891-8e82-45cf-bf91-3c96817cce2d
+		summarizeBy: sum
+		sourceColumn: team
+
+		annotation SummarizationSetBy = Automatic
+
+	column player_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 7a1dde77-cd90-4b34-b1a7-05ff4d9cc699
+		summarizeBy: none
+		sourceColumn: player_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column batting_order
+		dataType: int64
+		formatString: 0
+		lineageTag: 0fa7727b-e5f5-4c27-9fe4-f26d7e4f9140
+		summarizeBy: sum
+		sourceColumn: batting_order
+
+		annotation SummarizationSetBy = Automatic
+
+	column summary
+		dataType: string
+		lineageTag: 09394b66-6956-4010-addb-3b88e184e2c8
+		summarizeBy: none
+		sourceColumn: summary
+
+		annotation SummarizationSetBy = Automatic
+
+	column gamesPlayed
+		dataType: int64
+		formatString: 0
+		lineageTag: b325907e-d380-4989-be31-c3e001f93479
+		summarizeBy: sum
+		sourceColumn: gamesPlayed
+
+		annotation SummarizationSetBy = Automatic
+
+	column flyouts
+		dataType: int64
+		formatString: 0
+		lineageTag: 0e0c5c66-b406-4a3f-9660-38594f12b5e2
+		summarizeBy: sum
+		sourceColumn: flyouts
+
+		annotation SummarizationSetBy = Automatic
+
+	column groundOuts
+		dataType: int64
+		formatString: 0
+		lineageTag: 3e9f4f38-7e66-464b-b8d6-febf52c1d279
+		summarizeBy: sum
+		sourceColumn: groundOuts
+
+		annotation SummarizationSetBy = Automatic
+
+	column airouts
+		dataType: int64
+		formatString: 0
+		lineageTag: 684daee4-5dd3-45f7-907f-e8b55c823fbe
+		summarizeBy: sum
+		sourceColumn: airouts
+
+		annotation SummarizationSetBy = Automatic
+
+	column runs
+		dataType: int64
+		formatString: 0
+		lineageTag: 722047a2-2262-453c-b863-68965fae76e5
+		summarizeBy: sum
+		sourceColumn: runs
+
+		annotation SummarizationSetBy = Automatic
+
+	column doubles
+		dataType: int64
+		formatString: 0
+		lineageTag: 9920369f-d6a7-446b-99ec-2ab9b075a4fb
+		summarizeBy: sum
+		sourceColumn: doubles
+
+		annotation SummarizationSetBy = Automatic
+
+	column triples
+		dataType: int64
+		formatString: 0
+		lineageTag: 88a4d04b-62a5-426f-a651-04f98665303a
+		summarizeBy: sum
+		sourceColumn: triples
+
+		annotation SummarizationSetBy = Automatic
+
+	column homeRuns
+		dataType: int64
+		formatString: 0
+		lineageTag: 8bf588d8-d15c-409d-93ca-c6db14cfa158
+		summarizeBy: sum
+		sourceColumn: homeRuns
+
+		annotation SummarizationSetBy = Automatic
+
+	column strikeOuts
+		dataType: int64
+		formatString: 0
+		lineageTag: fcad1837-5a86-46fd-8e91-bf8ccfabdd31
+		summarizeBy: sum
+		sourceColumn: strikeOuts
+
+		annotation SummarizationSetBy = Automatic
+
+	column baseOnBalls
+		dataType: int64
+		formatString: 0
+		lineageTag: 4081b6d6-2be8-4835-8c98-294486eae512
+		summarizeBy: sum
+		sourceColumn: baseOnBalls
+
+		annotation SummarizationSetBy = Automatic
+
+	column intentionalWalks
+		dataType: int64
+		formatString: 0
+		lineageTag: a9bc6df2-3cbf-48a1-bf7e-c10efede8f45
+		summarizeBy: sum
+		sourceColumn: intentionalWalks
+
+		annotation SummarizationSetBy = Automatic
+
+	column hits
+		dataType: int64
+		formatString: 0
+		lineageTag: b6d2163f-209d-4c3b-a173-25d4560e2cb8
+		summarizeBy: sum
+		sourceColumn: hits
+
+		annotation SummarizationSetBy = Automatic
+
+	column hitByPitch
+		dataType: int64
+		formatString: 0
+		lineageTag: a360f7dd-6d42-4c43-85ed-bdd226fc03b6
+		summarizeBy: sum
+		sourceColumn: hitByPitch
+
+		annotation SummarizationSetBy = Automatic
+
+	column atBats
+		dataType: int64
+		formatString: 0
+		lineageTag: 028b8bfe-475a-41c4-8b5b-3f3253da188c
+		summarizeBy: sum
+		sourceColumn: atBats
+
+		annotation SummarizationSetBy = Automatic
+
+	column game_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 0621c934-03a4-430a-a0d7-779da344bd23
+		summarizeBy: none
+		sourceColumn: game_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column caughtStealing
+		dataType: int64
+		formatString: 0
+		lineageTag: 25de733d-55b4-4e5c-9db3-f04835266e0b
+		summarizeBy: sum
+		sourceColumn: caughtStealing
+
+		annotation SummarizationSetBy = Automatic
+
+	column stolenBases
+		dataType: int64
+		formatString: 0
+		lineageTag: 6754dba9-5fe1-4d1d-863b-bc0914923c96
+		summarizeBy: sum
+		sourceColumn: stolenBases
+
+		annotation SummarizationSetBy = Automatic
+
+	column groungdIntoDoublePlay
+		dataType: string
+		lineageTag: 6cb46f2c-3a21-48c4-b7fb-39e92c7ad9ef
+		summarizeBy: none
+		sourceColumn: groungdIntoDoublePlay
+
+		annotation SummarizationSetBy = Automatic
+
+	column groundedIntoTriplePlay
+		dataType: string
+		lineageTag: 4ddf8848-a87b-43ed-aa75-f9fac3d3bc87
+		summarizeBy: none
+		sourceColumn: groundedIntoTriplePlay
+
+		annotation SummarizationSetBy = Automatic
+
+	column plateAppearances
+		dataType: int64
+		formatString: 0
+		lineageTag: 41f7591d-5f6c-47d5-b04e-2e3aab8acb63
+		summarizeBy: sum
+		sourceColumn: plateAppearances
+
+		annotation SummarizationSetBy = Automatic
+
+	column leftOnBase
+		dataType: int64
+		formatString: 0
+		lineageTag: 59bdca2f-d830-455b-9c93-c33c8acbb7ee
+		summarizeBy: sum
+		sourceColumn: leftOnBase
+
+		annotation SummarizationSetBy = Automatic
+
+	column totalBases
+		dataType: int64
+		formatString: 0
+		lineageTag: 1907a061-b53a-4286-865d-356d0fc36eaf
+		summarizeBy: sum
+		sourceColumn: totalBases
+
+		annotation SummarizationSetBy = Automatic
+
+	column rbi
+		dataType: int64
+		formatString: 0
+		lineageTag: 2e5c1b45-e02d-43c5-b16a-b654ce4c2c23
+		summarizeBy: sum
+		sourceColumn: rbi
+
+		annotation SummarizationSetBy = Automatic
+
+	partition mlb_boxscores_2025-07-05 = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\metsy\source\repos\mlb-data\assets\csv\boxscores\mlb_boxscores_2025-07-05.csv"),[Delimiter=",", Columns=27, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"game_id", Int64.Type}, {"team", Int64.Type}, {"player_id", Int64.Type}, {"batting_order", Int64.Type}, {"summary", type text}, {"gamesPlayed", Int64.Type}, {"flyouts", Int64.Type}, {"groundOuts", Int64.Type}, {"airouts", Int64.Type}, {"runs", Int64.Type}, {"doubles", Int64.Type}, {"triples", Int64.Type}, {"homeRuns", Int64.Type}, {"strikeOuts", Int64.Type}, {"baseOnBalls", Int64.Type}, {"intentionalWalks", Int64.Type}, {"hits", Int64.Type}, {"hitByPitch", Int64.Type}, {"atBats", Int64.Type}, {"caughtStealing", Int64.Type}, {"stolenBases", Int64.Type}, {"groungdIntoDoublePlay", type text}, {"groundedIntoTriplePlay", type text}, {"plateAppearances", Int64.Type}, {"leftOnBase", Int64.Type}, {"totalBases", Int64.Type}, {"rbi", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
