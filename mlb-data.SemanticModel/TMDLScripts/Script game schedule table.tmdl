@@ -1,0 +1,63 @@
+createOrReplace
+
+	table game_schedule
+		lineageTag: 0f340865-ab89-4b21-8f32-79330d98a8ea
+
+		column gamePk
+			dataType: string
+			lineageTag: 4ee3750a-7808-4884-a6e8-f59a439f99f2
+			summarizeBy: none
+			sourceColumn: gamePk
+
+			annotation SummarizationSetBy = Automatic
+
+		column gameDate
+			dataType: string
+			lineageTag: f59a717a-23ab-4741-a3a2-74ef2a4efcbe
+			summarizeBy: none
+			sourceColumn: gameDate
+
+			annotation SummarizationSetBy = Automatic
+
+		column 'teams.away.team.id'
+			dataType: string
+			lineageTag: 5a54d94c-6208-4895-95a7-dbf65ea2794d
+			summarizeBy: none
+			sourceColumn: teams.away.team.id
+
+			annotation SummarizationSetBy = Automatic
+
+		column 'teams.home.team.id'
+			dataType: string
+			lineageTag: 96022832-e585-417c-b255-167626eb1d45
+			summarizeBy: none
+			sourceColumn: teams.home.team.id
+
+			annotation SummarizationSetBy = Automatic
+
+		column date
+			dataType: dateTime
+			formatString: Long Date
+			lineageTag: f779462b-f76f-4336-9c1a-9be203a458c0
+			summarizeBy: none
+			sourceColumn: date
+
+			annotation SummarizationSetBy = Automatic
+
+			annotation UnderlyingDateTimeDataType = Date
+
+		partition game_schedule = m
+			mode: import
+			source =
+					let
+					    Source = Csv.Document(File.Contents("C:\Users\metsy\source\repos\mlb-data\data\csv\games\combined_games.csv"),[Delimiter=",", Columns=5, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+					    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+					    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"date", type date}}),
+					    #"Filtered Rows" = Table.SelectRows(#"Changed Type", each [date] <> null and [date] <> "")
+					in
+					    #"Filtered Rows"
+
+		annotation PBI_NavigationStepName = Navigation
+
+		annotation PBI_ResultType = Table
+
