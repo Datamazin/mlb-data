@@ -373,7 +373,7 @@ table player_info
 		mode: import
 		source =
 				let
-				    Source = Csv.Document(File.Contents("C:\Users\metsy\source\repos\mlb-data\data\csv\players\player_info.csv"),[Delimiter=",", Columns=46, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    Source = Csv.Document(File.Contents("C:\Users\metsy\dev\development\active-projects\mlb-data\data\csv\players\player_info.csv"),[Delimiter=",", Columns=46, Encoding=65001, QuoteStyle=QuoteStyle.None]),
 				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true])
 				in
 				    #"Promoted Headers"

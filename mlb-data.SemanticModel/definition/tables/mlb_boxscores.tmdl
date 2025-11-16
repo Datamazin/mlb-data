@@ -261,7 +261,7 @@ table mlb_boxscores
 		mode: import
 		source =
 				let
-				    Source = Csv.Document(File.Contents("C:\Users\metsy\source\repos\mlb-data\data\csv\boxscores\combined_boxscores.csv"),[Delimiter=",", Columns=18, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    Source = Csv.Document(File.Contents("C:\Users\metsy\dev\development\active-projects\mlb-data\data\csv\boxscores\combined_boxscores.csv"),[Delimiter=",", Columns=18, Encoding=1252, QuoteStyle=QuoteStyle.None]),
 				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
 				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"gamePk", Int64.Type}, {"team", type text}, {"team_type", type text}, {"player_id", Int64.Type}, {"player_name", type text}, {"batting_order", Int64.Type}, {"gamesPlayed", Int64.Type}, {"atBats", Int64.Type}, {"hits", Int64.Type}, {"runs", Int64.Type}, {"doubles", Int64.Type}, {"triples", Int64.Type}, {"homeRuns", Int64.Type}, {"rbi", Int64.Type}, {"baseOnBalls", Int64.Type}, {"strikeOuts", Int64.Type}, {"leftOnBase", Int64.Type}, {"date", type text}})
 				in

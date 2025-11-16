@@ -35,7 +35,7 @@ table game_schedule
 
 	column date
 		dataType: dateTime
-		formatString: Long Date
+		formatString: Short Date
 		lineageTag: f779462b-f76f-4336-9c1a-9be203a458c0
 		summarizeBy: none
 		sourceColumn: date
@@ -48,7 +48,7 @@ table game_schedule
 		mode: import
 		source =
 				let
-				    Source = Csv.Document(File.Contents("C:\Users\metsy\source\repos\mlb-data\data\csv\games\combined_games.csv"),[Delimiter=",", Columns=5, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    Source = Csv.Document(File.Contents("C:\Users\metsy\dev\development\active-projects\mlb-data\data\csv\games\combined_games.csv"),[Delimiter=",", Columns=5, Encoding=1252, QuoteStyle=QuoteStyle.None]),
 				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
 				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"date", type date}}),
 				    #"Filtered Rows" = Table.SelectRows(#"Changed Type", each [date] <> null and [date] <> "")
