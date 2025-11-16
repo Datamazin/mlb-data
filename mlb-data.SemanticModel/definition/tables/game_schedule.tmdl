@@ -1,8 +1,13 @@
 table game_schedule
 	lineageTag: 0f340865-ab89-4b21-8f32-79330d98a8ea
 
+	measure Measure = count(game_schedule[gamePk])
+		formatString: 0
+		lineageTag: 705fb657-cba0-4d2f-8c7a-15d32bf3ddda
+
 	column gamePk
-		dataType: string
+		dataType: int64
+		formatString: 0
 		lineageTag: 4ee3750a-7808-4884-a6e8-f59a439f99f2
 		summarizeBy: none
 		sourceColumn: gamePk
@@ -10,7 +15,8 @@ table game_schedule
 		annotation SummarizationSetBy = Automatic
 
 	column gameDate
-		dataType: string
+		dataType: dateTime
+		formatString: General Date
 		lineageTag: f59a717a-23ab-4741-a3a2-74ef2a4efcbe
 		summarizeBy: none
 		sourceColumn: gameDate
@@ -18,7 +24,8 @@ table game_schedule
 		annotation SummarizationSetBy = Automatic
 
 	column 'teams.away.team.id'
-		dataType: string
+		dataType: int64
+		formatString: 0
 		lineageTag: 5a54d94c-6208-4895-95a7-dbf65ea2794d
 		summarizeBy: none
 		sourceColumn: teams.away.team.id
@@ -26,34 +33,542 @@ table game_schedule
 		annotation SummarizationSetBy = Automatic
 
 	column 'teams.home.team.id'
-		dataType: string
+		dataType: int64
+		formatString: 0
 		lineageTag: 96022832-e585-417c-b255-167626eb1d45
 		summarizeBy: none
 		sourceColumn: teams.home.team.id
 
 		annotation SummarizationSetBy = Automatic
 
-	column date
+	column gameGuid
+		dataType: string
+		lineageTag: 27019aac-89a6-45ac-a9c2-bc51671420da
+		summarizeBy: none
+		sourceColumn: gameGuid
+
+		annotation SummarizationSetBy = Automatic
+
+	column link
+		dataType: string
+		lineageTag: a05602ed-72f7-4638-88e1-5e4b439634ef
+		summarizeBy: none
+		sourceColumn: link
+
+		annotation SummarizationSetBy = Automatic
+
+	column gameType
+		dataType: string
+		lineageTag: b2adf2ba-1b87-4e93-8639-dc05aa27453d
+		summarizeBy: none
+		sourceColumn: gameType
+
+		annotation SummarizationSetBy = Automatic
+
+	column season
+		dataType: int64
+		formatString: 0
+		lineageTag: b8869466-b048-4695-958a-8c5c3d1b896e
+		summarizeBy: none
+		sourceColumn: season
+
+		annotation SummarizationSetBy = Automatic
+
+	column officialDate
 		dataType: dateTime
 		formatString: Short Date
-		lineageTag: f779462b-f76f-4336-9c1a-9be203a458c0
+		lineageTag: a5621d8b-0796-4807-8b73-2a6904e5a998
 		summarizeBy: none
-		sourceColumn: date
+		sourceColumn: officialDate
 
 		annotation SummarizationSetBy = Automatic
 
 		annotation UnderlyingDateTimeDataType = Date
 
+	column isTie
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: e16fc538-7bbf-4a28-9536-b911d84ef908
+		summarizeBy: none
+		sourceColumn: isTie
+
+		annotation SummarizationSetBy = Automatic
+
+	column gameNumber
+		dataType: int64
+		formatString: 0
+		lineageTag: d3c8deb4-fc5a-4ab8-8141-2c0cb560a153
+		summarizeBy: none
+		sourceColumn: gameNumber
+
+		annotation SummarizationSetBy = Automatic
+
+	column publicFacing
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 54e21615-5d95-49fd-a1a6-5871ac30ac18
+		summarizeBy: none
+		sourceColumn: publicFacing
+
+		annotation SummarizationSetBy = Automatic
+
+	column doubleHeader
+		dataType: string
+		lineageTag: 3c9be5b3-4002-442c-b5f0-d935dc0ef0da
+		summarizeBy: none
+		sourceColumn: doubleHeader
+
+		annotation SummarizationSetBy = Automatic
+
+	column gamedayType
+		dataType: string
+		lineageTag: a78f29f0-8c87-49c2-a553-fcb61d27292a
+		summarizeBy: none
+		sourceColumn: gamedayType
+
+		annotation SummarizationSetBy = Automatic
+
+	column tiebreaker
+		dataType: string
+		lineageTag: 81cea111-c0e4-4bd1-a19b-a2e4ce6eec58
+		summarizeBy: none
+		sourceColumn: tiebreaker
+
+		annotation SummarizationSetBy = Automatic
+
+	column calendarEventID
+		dataType: string
+		lineageTag: 47c484c3-b6d9-435b-ab8b-d699bef6c941
+		summarizeBy: none
+		sourceColumn: calendarEventID
+
+		annotation SummarizationSetBy = Automatic
+
+	column seasonDisplay
+		dataType: int64
+		formatString: 0
+		lineageTag: 80c032e1-c7a7-484f-912a-a70be07f6545
+		summarizeBy: none
+		sourceColumn: seasonDisplay
+
+		annotation SummarizationSetBy = Automatic
+
+	column dayNight
+		dataType: string
+		lineageTag: 6f7eb7d0-6d08-4b16-ae9e-389f1199ee49
+		summarizeBy: none
+		sourceColumn: dayNight
+
+		annotation SummarizationSetBy = Automatic
+
+	column scheduledInnings
+		dataType: int64
+		formatString: 0
+		lineageTag: 85188a9b-1093-4764-9714-f7877d7b95f1
+		summarizeBy: none
+		sourceColumn: scheduledInnings
+
+		annotation SummarizationSetBy = Automatic
+
+	column reverseHomeAwayStatus
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: e95e31cb-94fe-49a8-b73d-05d04f698fe5
+		summarizeBy: none
+		sourceColumn: reverseHomeAwayStatus
+
+		annotation SummarizationSetBy = Automatic
+
+	column inningBreakLength
+		dataType: int64
+		formatString: 0
+		lineageTag: 753c19d6-2974-40b8-82ea-b3eee808b4e0
+		summarizeBy: none
+		sourceColumn: inningBreakLength
+
+		annotation SummarizationSetBy = Automatic
+
+	column gamesInSeries
+		dataType: int64
+		formatString: 0
+		lineageTag: dad8a3e0-cf86-4a41-901a-0eda2f647172
+		summarizeBy: none
+		sourceColumn: gamesInSeries
+
+		annotation SummarizationSetBy = Automatic
+
+	column seriesGameNumber
+		dataType: int64
+		formatString: 0
+		lineageTag: 51fd5bde-9f73-4409-bca4-551fa8f9b895
+		summarizeBy: none
+		sourceColumn: seriesGameNumber
+
+		annotation SummarizationSetBy = Automatic
+
+	column seriesDescription
+		dataType: string
+		lineageTag: b32d6eab-c3f0-4066-91d2-b8951652464d
+		summarizeBy: none
+		sourceColumn: seriesDescription
+
+		annotation SummarizationSetBy = Automatic
+
+	column recordSource
+		dataType: string
+		lineageTag: 17b8da8d-0736-4688-87e9-de9074c8ec1d
+		summarizeBy: none
+		sourceColumn: recordSource
+
+		annotation SummarizationSetBy = Automatic
+
+	column ifNecessary
+		dataType: string
+		lineageTag: da3d9f37-60b9-4e2e-8dbb-ddc5d72b5a60
+		summarizeBy: none
+		sourceColumn: ifNecessary
+
+		annotation SummarizationSetBy = Automatic
+
+	column ifNecessaryDescription
+		dataType: string
+		lineageTag: 22640555-5b5b-4b46-b168-b4dce6a6f434
+		summarizeBy: none
+		sourceColumn: ifNecessaryDescription
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'status.abstractGameState'
+		dataType: string
+		lineageTag: 9edfc9a5-d408-4af1-937f-e11ef03a8d44
+		summarizeBy: none
+		sourceColumn: status.abstractGameState
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'status.codedGameState'
+		dataType: string
+		lineageTag: 90d24856-528e-422a-afe9-096e4dc256d6
+		summarizeBy: none
+		sourceColumn: status.codedGameState
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'status.detailedState'
+		dataType: string
+		lineageTag: bdc0af2a-108b-441a-8a36-ded6a38456b7
+		summarizeBy: none
+		sourceColumn: status.detailedState
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'status.statusCode'
+		dataType: string
+		lineageTag: 22985c80-4370-4af6-b331-c9a848bb6386
+		summarizeBy: none
+		sourceColumn: status.statusCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'status.startTimeTBD'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 8e0a01ab-47a0-4517-aa9e-9c03f82eb4d6
+		summarizeBy: none
+		sourceColumn: status.startTimeTBD
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'status.abstractGameCode'
+		dataType: string
+		lineageTag: d11bb80f-c5ae-4c50-9692-4f53ac22e717
+		summarizeBy: none
+		sourceColumn: status.abstractGameCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'teams.away.leagueRecord.wins'
+		dataType: int64
+		formatString: 0
+		lineageTag: 74d58896-6d28-41de-95cb-d47048703398
+		summarizeBy: none
+		sourceColumn: teams.away.leagueRecord.wins
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'teams.away.leagueRecord.losses'
+		dataType: int64
+		formatString: 0
+		lineageTag: 60da92db-81a4-449a-94da-837dc01bb1fd
+		summarizeBy: none
+		sourceColumn: teams.away.leagueRecord.losses
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'teams.away.leagueRecord.pct'
+		dataType: double
+		lineageTag: 67ec3a42-e083-46bb-a371-b9f8684e4176
+		summarizeBy: none
+		sourceColumn: teams.away.leagueRecord.pct
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'teams.away.score'
+		dataType: int64
+		formatString: 0
+		lineageTag: 009e45a0-1e3a-42c4-8b65-ffbfe0989c6a
+		summarizeBy: none
+		sourceColumn: teams.away.score
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'teams.away.team.name'
+		dataType: string
+		lineageTag: cf6f218a-8dca-41e0-a820-68440a0f6d03
+		summarizeBy: none
+		sourceColumn: teams.away.team.name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'teams.away.team.link'
+		dataType: string
+		lineageTag: 3e431bb8-aad2-4d1c-b6a1-7b57e93a8717
+		summarizeBy: none
+		sourceColumn: teams.away.team.link
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'teams.away.isWinner'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 2675dba9-d843-41da-8e44-5424d7a1d9be
+		summarizeBy: none
+		sourceColumn: teams.away.isWinner
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'teams.away.splitSquad'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 7c117ffa-022f-4ec9-96ba-85dc94d86952
+		summarizeBy: none
+		sourceColumn: teams.away.splitSquad
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'teams.away.seriesNumber'
+		dataType: int64
+		formatString: 0
+		lineageTag: 29289bea-64b2-435d-84dd-a87e21a05d12
+		summarizeBy: none
+		sourceColumn: teams.away.seriesNumber
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'teams.home.leagueRecord.wins'
+		dataType: int64
+		formatString: 0
+		lineageTag: 03880095-5f9a-4f1a-bbb0-3fa9b2d75ad5
+		summarizeBy: none
+		sourceColumn: teams.home.leagueRecord.wins
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'teams.home.leagueRecord.losses'
+		dataType: int64
+		formatString: 0
+		lineageTag: 2499f2f0-bcd3-4d74-bf40-da7a3f648dde
+		summarizeBy: none
+		sourceColumn: teams.home.leagueRecord.losses
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'teams.home.leagueRecord.pct'
+		dataType: double
+		lineageTag: 08f0a951-319e-4b3a-959a-b70a053a0a8e
+		summarizeBy: none
+		sourceColumn: teams.home.leagueRecord.pct
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'teams.home.score'
+		dataType: int64
+		formatString: 0
+		lineageTag: b00f9095-922b-4a0d-b175-14cbaeb5e2ea
+		summarizeBy: none
+		sourceColumn: teams.home.score
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'teams.home.team.name'
+		dataType: string
+		lineageTag: 666017ad-af1a-489e-976c-a5cda8533611
+		summarizeBy: none
+		sourceColumn: teams.home.team.name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'teams.home.team.link'
+		dataType: string
+		lineageTag: 7db18462-d283-45c9-a53e-07bc8066a901
+		summarizeBy: none
+		sourceColumn: teams.home.team.link
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'teams.home.isWinner'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: b7179802-0d72-4eca-ad5a-dcf1c223a051
+		summarizeBy: none
+		sourceColumn: teams.home.isWinner
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'teams.home.splitSquad'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 315be904-676f-4928-a974-c23ff8f5ee08
+		summarizeBy: none
+		sourceColumn: teams.home.splitSquad
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'teams.home.seriesNumber'
+		dataType: int64
+		formatString: 0
+		lineageTag: 6829c6d5-3daa-4aa8-ad4e-5e0dc7f5a5fc
+		summarizeBy: none
+		sourceColumn: teams.home.seriesNumber
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'venue.id'
+		dataType: int64
+		formatString: 0
+		lineageTag: 06a42a63-d604-41db-b1a4-d21883434009
+		summarizeBy: none
+		sourceColumn: venue.id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'venue.name'
+		dataType: string
+		lineageTag: 5335ffda-6b5c-4b3b-ad25-20de5128af88
+		summarizeBy: none
+		sourceColumn: venue.name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'venue.link'
+		dataType: string
+		lineageTag: e838fa64-61d9-4e7d-8194-812c3ad82ff7
+		summarizeBy: none
+		sourceColumn: venue.link
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'content.link'
+		dataType: string
+		lineageTag: bc530b9f-a14f-4177-b6a4-d5e93371f70f
+		summarizeBy: none
+		sourceColumn: content.link
+
+		annotation SummarizationSetBy = Automatic
+
+	column description
+		dataType: string
+		lineageTag: c8ef0000-1aac-4889-aa11-b67b305589ea
+		summarizeBy: none
+		sourceColumn: description
+
+		annotation SummarizationSetBy = Automatic
+
+	column rescheduleDate
+		dataType: string
+		lineageTag: a6514ac8-6271-4118-9b8e-f56c116cc08c
+		summarizeBy: none
+		sourceColumn: rescheduleDate
+
+		annotation SummarizationSetBy = Automatic
+
+	column rescheduleGameDate
+		dataType: string
+		lineageTag: 671aa719-efdc-4656-b97e-93de93501f44
+		summarizeBy: none
+		sourceColumn: rescheduleGameDate
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'status.reason'
+		dataType: string
+		lineageTag: 0c765518-290e-4ec7-864d-66d35c652eba
+		summarizeBy: none
+		sourceColumn: status.reason
+
+		annotation SummarizationSetBy = Automatic
+
+	column rescheduledFrom
+		dataType: string
+		lineageTag: 8665d16a-538f-4baa-b6be-327f70d62b74
+		summarizeBy: none
+		sourceColumn: rescheduledFrom
+
+		annotation SummarizationSetBy = Automatic
+
+	column rescheduledFromDate
+		dataType: string
+		lineageTag: d0ff329f-009c-4037-bc91-06b78062692a
+		summarizeBy: none
+		sourceColumn: rescheduledFromDate
+
+		annotation SummarizationSetBy = Automatic
+
+	column resumeDate
+		dataType: string
+		lineageTag: 88ffd3d9-853d-4090-a499-5e5b14b570db
+		summarizeBy: none
+		sourceColumn: resumeDate
+
+		annotation SummarizationSetBy = Automatic
+
+	column resumeGameDate
+		dataType: string
+		lineageTag: dd0b6788-3090-45a0-b57a-eedbf8c4c90d
+		summarizeBy: none
+		sourceColumn: resumeGameDate
+
+		annotation SummarizationSetBy = Automatic
+
+	column resumedFrom
+		dataType: string
+		lineageTag: 57e34c2a-1e49-4307-b090-0f16ae91895f
+		summarizeBy: none
+		sourceColumn: resumedFrom
+
+		annotation SummarizationSetBy = Automatic
+
+	column resumedFromDate
+		dataType: string
+		lineageTag: 5aced79c-e48c-4100-a7e6-a4fa36d64472
+		summarizeBy: none
+		sourceColumn: resumedFromDate
+
+		annotation SummarizationSetBy = Automatic
+
 	partition game_schedule = m
 		mode: import
 		source =
 				let
-				    Source = Csv.Document(File.Contents("C:\Users\metsy\dev\development\active-projects\mlb-data\data\csv\games\combined_games.csv"),[Delimiter=",", Columns=5, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    Source = Csv.Document(File.Contents("C:\Users\metsy\dev\development\active-projects\mlb-data\data\csv\games\game-schedule-combined.csv"),[Delimiter=",", Columns=65, Encoding=1252, QuoteStyle=QuoteStyle.None]),
 				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
-				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"date", type date}}),
-				    #"Filtered Rows" = Table.SelectRows(#"Changed Type", each [date] <> null and [date] <> "")
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"officialDate", type date}, {"gameDate", type datetime}, {"gamePk", Int64.Type}, {"gameGuid", type text}, {"link", type text}, {"gameType", type text}, {"season", Int64.Type}, {"isTie", type logical}, {"gameNumber", Int64.Type}, {"publicFacing", type logical}, {"doubleHeader", type text}, {"gamedayType", type text}, {"tiebreaker", type text}, {"calendarEventID", type text}, {"seasonDisplay", Int64.Type}, {"dayNight", type text}, {"scheduledInnings", Int64.Type}, {"reverseHomeAwayStatus", type logical}, {"inningBreakLength", Int64.Type}, {"gamesInSeries", Int64.Type}, {"seriesGameNumber", Int64.Type}, {"seriesDescription", type text}, {"recordSource", type text}, {"ifNecessary", type text}, {"ifNecessaryDescription", type text}, {"status.abstractGameState", type text}, {"status.codedGameState", type text}, {"status.detailedState", type text}, {"status.statusCode", type text}, {"status.startTimeTBD", type logical}, {"status.abstractGameCode", type text}, {"teams.away.leagueRecord.wins", Int64.Type}, {"teams.away.leagueRecord.losses", Int64.Type}, {"teams.away.leagueRecord.pct", type number}, {"teams.away.score", Int64.Type}, {"teams.away.team.id", Int64.Type}, {"teams.away.team.name", type text}, {"teams.away.team.link", type text}, {"teams.away.isWinner", type logical}, {"teams.away.splitSquad", type logical}, {"teams.away.seriesNumber", Int64.Type}, {"teams.home.leagueRecord.wins", Int64.Type}, {"teams.home.leagueRecord.losses", Int64.Type}, {"teams.home.leagueRecord.pct", type number}, {"teams.home.score", Int64.Type}, {"teams.home.team.id", Int64.Type}, {"teams.home.team.name", type text}, {"teams.home.team.link", type text}, {"teams.home.isWinner", type logical}, {"teams.home.splitSquad", type logical}, {"teams.home.seriesNumber", Int64.Type}, {"venue.id", Int64.Type}, {"venue.name", type text}, {"venue.link", type text}, {"content.link", type text}, {"description", type text}, {"rescheduleDate", type text}, {"rescheduleGameDate", type text}, {"status.reason", type text}, {"rescheduledFrom", type text}, {"rescheduledFromDate", type text}, {"resumeDate", type text}, {"resumeGameDate", type text}, {"resumedFrom", type text}, {"resumedFromDate", type text}})
 				in
-				    #"Filtered Rows"
+				    #"Changed Type"
 
 	annotation PBI_NavigationStepName = Navigation
 

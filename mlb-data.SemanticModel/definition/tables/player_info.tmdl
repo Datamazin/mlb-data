@@ -9,11 +9,11 @@ table player_info
 
 		annotation SummarizationSetBy = Automatic
 
-	column fullName
+	column Player
 		dataType: string
 		lineageTag: 8045c2bc-6a21-48c6-ba20-4a33f8e41e86
 		summarizeBy: none
-		sourceColumn: fullName
+		sourceColumn: Player
 
 		annotation SummarizationSetBy = Automatic
 
@@ -289,11 +289,11 @@ table player_info
 
 		annotation SummarizationSetBy = Automatic
 
-	column 'primaryPosition.abbreviation'
+	column Position
 		dataType: string
 		lineageTag: c8b26fe8-6c9b-4841-93aa-a6d0d0be6bb0
 		summarizeBy: none
-		sourceColumn: primaryPosition.abbreviation
+		sourceColumn: Position
 
 		annotation SummarizationSetBy = Automatic
 
@@ -374,9 +374,10 @@ table player_info
 		source =
 				let
 				    Source = Csv.Document(File.Contents("C:\Users\metsy\dev\development\active-projects\mlb-data\data\csv\players\player_info.csv"),[Delimiter=",", Columns=46, Encoding=65001, QuoteStyle=QuoteStyle.None]),
-				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true])
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Renamed Columns" = Table.RenameColumns(#"Promoted Headers",{{"fullName", "Player"}, {"primaryPosition.abbreviation", "Position"}})
 				in
-				    #"Promoted Headers"
+				    #"Renamed Columns"
 
 	annotation PBI_NavigationStepName = Navigation
 

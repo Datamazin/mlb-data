@@ -2,9 +2,8 @@ relationship 33c68d41-152b-288e-8230-766ed17ae24f
 	fromColumn: mlb_boxscores.player_id
 	toColumn: player_info.id
 
-relationship 3ac4454d-5128-01a8-94aa-7e49f1e67f76
+relationship 1e791ecd-bd14-32cb-f8e5-e0ae94047ba6
 	crossFilteringBehavior: bothDirections
-	toCardinality: many
-	fromColumn: game_schedule.gamePk
-	toColumn: mlb_boxscores.gamePk
+	fromColumn: mlb_boxscores.gamePk
+	toColumn: game_schedule.gamePk
 

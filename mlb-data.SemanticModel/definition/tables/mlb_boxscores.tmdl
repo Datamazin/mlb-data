@@ -1,7 +1,7 @@
 table mlb_boxscores
 	lineageTag: 8b80e307-77cd-4bd6-8649-7d4b173456a1
 
-	measure 'Hits (H)' =
+	measure H =
 			
 			SUM('mlb_boxscores'[hits])
 		formatString: 0
@@ -15,11 +15,7 @@ table mlb_boxscores
 
 		changedProperty = FormatString
 
-	measure 'Sum Batting Order' = SUM('mlb_boxscores'[batting_order])
-		formatString: 0
-		lineageTag: a44848c7-cbf8-4211-9638-f0a0d147c76b
-
-	measure 'Sum Games Played' = SUM('mlb_boxscores'[gamesPlayed])
+	measure G = SUM('mlb_boxscores'[gamesPlayed])
 		formatString: 0
 		lineageTag: b819a3d4-9351-4f75-90f0-f0008e017a01
 
@@ -35,19 +31,19 @@ table mlb_boxscores
 		formatString: 0
 		lineageTag: c2199311-4aa6-4134-94a6-7ad2c363e194
 
-	measure 'Sum Runs' = SUM('mlb_boxscores'[runs])
+	measure R = SUM('mlb_boxscores'[runs])
 		formatString: 0
 		lineageTag: 36dbaf95-4af7-4f04-9985-2d1f2d7a782d
 
-	measure 'Sum Doubles' = SUM('mlb_boxscores'[doubles])
+	measure 2B = SUM('mlb_boxscores'[doubles])
 		formatString: 0
 		lineageTag: f633aba4-8770-46fd-83ed-63581540cbb8
 
-	measure 'Sum Triples' = SUM('mlb_boxscores'[triples])
+	measure 3B = SUM('mlb_boxscores'[triples])
 		formatString: 0
 		lineageTag: f73e4317-4c75-4e98-aa40-796ed924f773
 
-	measure 'Sum Home Runs' = SUM('mlb_boxscores'[homeRuns])
+	measure HR = SUM('mlb_boxscores'[homeRuns])
 		formatString: 0
 		lineageTag: f2e1f42f-a141-4457-ad54-313634b79a0e
 
@@ -63,15 +59,11 @@ table mlb_boxscores
 		formatString: 0
 		lineageTag: 6769e5b6-3d4f-4cef-9dbd-595e7f1562f5
 
-	measure 'Sum Hits' = SUM('mlb_boxscores'[hits])
-		formatString: 0
-		lineageTag: 6d862c1b-4f7a-4651-a6cd-0668d706d726
-
 	measure 'Sum Hit By Pitch' = SUM('mlb_boxscores_2025-07-05'[hitByPitch])
 		formatString: 0
 		lineageTag: 0a53529c-ea7c-42eb-943e-4d5249bcfa04
 
-	measure 'Sum At Bats' = SUM('mlb_boxscores'[atBats])
+	measure AB = SUM('mlb_boxscores'[atBats])
 		formatString: 0
 		lineageTag: 77155177-0b54-4062-a6ff-d03715302f55
 
@@ -95,7 +87,7 @@ table mlb_boxscores
 		formatString: 0
 		lineageTag: da58bff7-3236-4ad7-83f6-fb8c2d189a0b
 
-	measure 'Sum RBI' = SUM('mlb_boxscores'[rbi])
+	measure 'RBI''s' = SUM('mlb_boxscores'[rbi])
 		formatString: 0
 		lineageTag: a575223b-75f4-41c8-b830-6c709832584f
 
@@ -109,10 +101,13 @@ table mlb_boxscores
 
 	column player_id
 		dataType: int64
+		isHidden
 		formatString: 0
 		lineageTag: 7a1dde77-cd90-4b34-b1a7-05ff4d9cc699
 		summarizeBy: none
 		sourceColumn: player_id
+
+		changedProperty = IsHidden
 
 		annotation SummarizationSetBy = Automatic
 
@@ -120,10 +115,10 @@ table mlb_boxscores
 		dataType: int64
 		formatString: 0
 		lineageTag: 0fa7727b-e5f5-4c27-9fe4-f26d7e4f9140
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: batting_order
 
-		annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = User
 
 	column gamesPlayed
 		dataType: int64
@@ -136,19 +131,25 @@ table mlb_boxscores
 
 	column runs
 		dataType: int64
+		isHidden
 		formatString: 0
 		lineageTag: 722047a2-2262-453c-b863-68965fae76e5
 		summarizeBy: sum
 		sourceColumn: runs
 
+		changedProperty = IsHidden
+
 		annotation SummarizationSetBy = Automatic
 
 	column doubles
 		dataType: int64
+		isHidden
 		formatString: 0
 		lineageTag: 9920369f-d6a7-446b-99ec-2ab9b075a4fb
 		summarizeBy: sum
 		sourceColumn: doubles
+
+		changedProperty = IsHidden
 
 		annotation SummarizationSetBy = Automatic
 
@@ -163,10 +164,13 @@ table mlb_boxscores
 
 	column homeRuns
 		dataType: int64
+		isHidden
 		formatString: 0
 		lineageTag: 8bf588d8-d15c-409d-93ca-c6db14cfa158
 		summarizeBy: sum
 		sourceColumn: homeRuns
+
+		changedProperty = IsHidden
 
 		annotation SummarizationSetBy = Automatic
 
@@ -243,17 +247,12 @@ table mlb_boxscores
 
 	column player_name
 		dataType: string
+		isHidden
 		lineageTag: 88c7761b-2e4f-4d0c-8916-5ba32cfff6cc
 		summarizeBy: none
 		sourceColumn: player_name
 
-		annotation SummarizationSetBy = Automatic
-
-	column date
-		dataType: string
-		lineageTag: ad36dfc0-1b0c-4f3f-aaae-f1e0b144c69a
-		summarizeBy: none
-		sourceColumn: date
+		changedProperty = IsHidden
 
 		annotation SummarizationSetBy = Automatic
 
@@ -261,9 +260,9 @@ table mlb_boxscores
 		mode: import
 		source =
 				let
-				    Source = Csv.Document(File.Contents("C:\Users\metsy\dev\development\active-projects\mlb-data\data\csv\boxscores\combined_boxscores.csv"),[Delimiter=",", Columns=18, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    Source = Csv.Document(File.Contents("C:\Users\metsy\dev\development\active-projects\mlb-data\data\csv\boxscores\combined_boxscores.csv"),[Delimiter=",", Columns=17, Encoding=1252, QuoteStyle=QuoteStyle.None]),
 				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
-				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"gamePk", Int64.Type}, {"team", type text}, {"team_type", type text}, {"player_id", Int64.Type}, {"player_name", type text}, {"batting_order", Int64.Type}, {"gamesPlayed", Int64.Type}, {"atBats", Int64.Type}, {"hits", Int64.Type}, {"runs", Int64.Type}, {"doubles", Int64.Type}, {"triples", Int64.Type}, {"homeRuns", Int64.Type}, {"rbi", Int64.Type}, {"baseOnBalls", Int64.Type}, {"strikeOuts", Int64.Type}, {"leftOnBase", Int64.Type}, {"date", type text}})
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"gamePk", Int64.Type}, {"team", type text}, {"team_type", type text}, {"player_id", Int64.Type}, {"player_name", type text}, {"batting_order", Int64.Type}, {"gamesPlayed", Int64.Type}, {"atBats", Int64.Type}, {"hits", Int64.Type}, {"runs", Int64.Type}, {"doubles", Int64.Type}, {"triples", Int64.Type}, {"homeRuns", Int64.Type}, {"rbi", Int64.Type}, {"baseOnBalls", Int64.Type}, {"strikeOuts", Int64.Type}, {"leftOnBase", Int64.Type}})
 				in
 				    #"Changed Type"
 
