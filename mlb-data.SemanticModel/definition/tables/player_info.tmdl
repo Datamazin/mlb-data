@@ -289,11 +289,11 @@ table player_info
 
 		annotation SummarizationSetBy = Automatic
 
-	column Position
+	column P
 		dataType: string
 		lineageTag: c8b26fe8-6c9b-4841-93aa-a6d0d0be6bb0
 		summarizeBy: none
-		sourceColumn: Position
+		sourceColumn: P
 
 		annotation SummarizationSetBy = Automatic
 
@@ -375,7 +375,7 @@ table player_info
 				let
 				    Source = Csv.Document(File.Contents("C:\Users\metsy\dev\development\active-projects\mlb-data\data\csv\players\player_info.csv"),[Delimiter=",", Columns=46, Encoding=65001, QuoteStyle=QuoteStyle.None]),
 				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
-				    #"Renamed Columns" = Table.RenameColumns(#"Promoted Headers",{{"fullName", "Player"}, {"primaryPosition.abbreviation", "Position"}})
+				    #"Renamed Columns" = Table.RenameColumns(#"Promoted Headers",{{"fullName", "Player"}, {"primaryPosition.abbreviation", "P"}})
 				in
 				    #"Renamed Columns"
 
