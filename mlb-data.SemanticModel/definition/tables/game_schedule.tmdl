@@ -1,6 +1,7 @@
 table game_schedule
 	lineageTag: 0f340865-ab89-4b21-8f32-79330d98a8ea
 
+	/// Total number of scheduled games in the dataset
 	measure Measure = count(game_schedule[gamePk])
 		formatString: 0
 		lineageTag: 705fb657-cba0-4d2f-8c7a-15d32bf3ddda
