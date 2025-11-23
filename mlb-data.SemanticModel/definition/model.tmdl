@@ -10,7 +10,7 @@ annotation __PBI_TimeIntelligenceEnabled = 0
 
 annotation PBI_QueryOrder = ["mlb_player_batting_boxscores","player_info","game_schedule"]
 
-annotation PBI_ProTooling = ["DevMode","TMDLView_Desktop"]
+annotation PBI_ProTooling = ["DevMode","TMDLView_Desktop","MCP-PBIModeling"]
 
 ref table mlb_player_batting_boxscores
 ref table player_info
