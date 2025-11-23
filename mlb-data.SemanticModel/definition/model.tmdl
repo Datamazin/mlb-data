@@ -8,11 +8,11 @@ model Model
 
 annotation __PBI_TimeIntelligenceEnabled = 0
 
-annotation PBI_QueryOrder = ["mlb_boxscores","player_info","game_schedule"]
+annotation PBI_QueryOrder = ["mlb_player_batting_boxscores","player_info","game_schedule"]
 
 annotation PBI_ProTooling = ["DevMode","TMDLView_Desktop"]
 
-ref table mlb_boxscores
+ref table mlb_player_batting_boxscores
 ref table player_info
 ref table game_schedule
 
