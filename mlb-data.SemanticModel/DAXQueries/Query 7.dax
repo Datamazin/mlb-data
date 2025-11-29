@@ -1,0 +1,7 @@
+DEFINE
+    MEASURE 'Player Hitting'[PA] = SUM('Player Hitting'[plateAppearances])
+
+EVALUATE
+    SUMMARIZECOLUMNS(
+        "PA", [PA]
+    )

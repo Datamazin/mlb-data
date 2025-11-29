@@ -8,13 +8,14 @@ model Model
 
 annotation __PBI_TimeIntelligenceEnabled = 0
 
-annotation PBI_QueryOrder = ["mlb_player_batting_boxscores","player_info","game_schedule"]
+annotation PBI_QueryOrder = ["Player Hitting","Player Info","Game Schedule","Date"]
 
-annotation PBI_ProTooling = ["DevMode","TMDLView_Desktop","MCP-PBIModeling"]
+annotation PBI_ProTooling = ["DevMode","TMDLView_Desktop","MCP-PBIModeling","DaxQueryView_Desktop"]
 
-ref table mlb_player_batting_boxscores
-ref table player_info
-ref table game_schedule
+ref table 'Player Hitting'
+ref table 'Player Info'
+ref table 'Game Schedule'
+ref table Date
 
 ref cultureInfo en-US
 

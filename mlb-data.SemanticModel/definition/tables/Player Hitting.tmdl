@@ -1,11 +1,11 @@
-table mlb_player_batting_boxscores
+table 'Player Hitting'
 	lineageTag: 8b80e307-77cd-4bd6-8649-7d4b173456a1
 
 	/// Total hits - the number of times a batter reaches base safely due to a batted ball (excludes walks, hit by pitch, errors, fielder's choice, etc.)
 	measure H =
 			
-			SUM('mlb_player_batting_boxscores'[hits])
-		formatString: 0
+			SUM('Player Hitting'[hits])
+		formatString: #,0
 		lineageTag: 78dc68c5-6499-4871-b69d-72bb0afb4e43
 
 		extendedProperty MeasureTemplate =
@@ -17,97 +17,149 @@ table mlb_player_batting_boxscores
 		changedProperty = FormatString
 
 	/// Games played - the total number of games in which the player appeared as a batter
-	measure G = SUM('mlb_player_batting_boxscores'[gamesPlayed])
-		formatString: 0
+	measure G =
+			
+			SWITCH(
+			  TRUE(),
+			  ISBLANK(SELECTEDVALUE('Player Hitting'[player_name])), BLANK(),
+			  SUM('Player Hitting'[gamesPlayed])
+			)
+		formatString: #,0
 		lineageTag: b819a3d4-9351-4f75-90f0-f0008e017a01
 
 	/// Fly outs - outs made when a batted ball is caught in the air by a fielder (specifically fly balls to outfielders)
-	measure 'Sum Flyouts' = SUM('mlb_player_batting_boxscores'[flyouts])
-		formatString: 0
+	measure FO = SUM('Player Hitting'[flyouts])
+		formatString: #,0
 		lineageTag: 1d5520e6-2d4c-4ced-b90a-86f3e372237f
 
 	/// Ground outs - outs made when a batted ball is fielded on the ground and the batter is thrown out at first base
-	measure 'Sum Ground Outs' = SUM('mlb_player_batting_boxscores'[groundOuts])
-		formatString: 0
+	measure GO = SUM('Player Hitting'[groundOuts])
+		formatString: #,0
 		lineageTag: 9a810c9a-e38c-4e41-9479-5c1a5e1640c0
 
 	/// Air outs - outs made when a batted ball is caught in the air before touching the ground (fly outs, pop outs, line outs)
-	measure 'Sum Airouts' = SUM('mlb_player_batting_boxscores'[airouts])
+	measure AO = SUM('Player Hitting'[airouts])
+		formatString: #,0
 		lineageTag: c2199311-4aa6-4134-94a6-7ad2c363e194
 
 	/// Runs scored - the number of times a player crosses home plate to score for their team
-	measure R = SUM('mlb_player_batting_boxscores'[runs])
-		formatString: 0
+	measure R = SUM('Player Hitting'[runs])
+		formatString: #,0
 		lineageTag: 36dbaf95-4af7-4f04-9985-2d1f2d7a782d
 
 	/// Doubles - hits where the batter safely reaches second base (two-base hits)
-	measure 2B = SUM('mlb_player_batting_boxscores'[doubles])
-		formatString: 0
+	measure 2B = SUM('Player Hitting'[doubles])
+		formatString: #,0
 		lineageTag: f633aba4-8770-46fd-83ed-63581540cbb8
 
 	/// Triples - hits where the batter safely reaches third base (three-base hits)
-	measure 3B = SUM('mlb_player_batting_boxscores'[triples])
-		formatString: 0
+	measure 3B = SUM('Player Hitting'[triples])
+		formatString: #,0
 		lineageTag: f73e4317-4c75-4e98-aa40-796ed924f773
 
 	/// Home runs - hits where the batter circles all bases and scores (four-base hits)
-	measure HR = SUM('mlb_player_batting_boxscores'[homeRuns])
-		formatString: 0
+	measure HR = SUM('Player Hitting'[homeRuns])
+		formatString: #,0
 		lineageTag: f2e1f42f-a141-4457-ad54-313634b79a0e
 
 	/// Strikeouts - the number of times a batter is out due to accumulating three strikes
-	measure SO = SUM('mlb_player_batting_boxscores'[strikeOuts])
-		formatString: 0
+	measure SO = SUM('Player Hitting'[strikeOuts])
+		formatString: #,0
 		lineageTag: 9e4ad7a9-9b4a-4ed2-8e7e-46fe892ec46d
 
 	/// Base on balls (walks) - times a batter is awarded first base due to four balls thrown outside the strike zone
-	measure BB = SUM('mlb_player_batting_boxscores'[baseOnBalls])
-		formatString: 0
+	measure BB = SUM('Player Hitting'[baseOnBalls])
+		formatString: #,0
 		lineageTag: d4c83493-6490-4576-bce3-8b744609404d
 
 	/// Intentional walks - deliberate walks issued by the pitcher/catcher to avoid pitching to a dangerous hitter
-	measure 'Sum Intentional Walks' = SUM('mlb_player_batting_boxscores'[intentionalWalks])
-		formatString: 0
+	measure IBB = SUM('Player Hitting'[intentionalWalks])
+		formatString: #,0
 		lineageTag: 6769e5b6-3d4f-4cef-9dbd-595e7f1562f5
 
 	/// Hit by pitch - times a batter is awarded first base after being struck by a pitched ball
-	measure 'Sum Hit By Pitch' = SUM('mlb_player_batting_boxscores'[hitByPitch])
+	measure HBP = SUM('Player Hitting'[hitByPitch])
+		formatString: #,0
 		lineageTag: 0a53529c-ea7c-42eb-943e-4d5249bcfa04
 
 	/// At bats - plate appearances that result in a hit, error, fielder's choice, or out (excludes walks, hit by pitch, sacrifice flies, and interference)
-	measure AB = SUM('mlb_player_batting_boxscores'[atBats])
-		formatString: 0
+	measure AB = SUM('Player Hitting'[atBats])
+		formatString: #,0
 		lineageTag: 77155177-0b54-4062-a6ff-d03715302f55
 
 	/// Caught stealing - times a baserunner is thrown out while attempting to steal a base
-	measure 'Sum Caught Stealing' = SUM('mlb_player_batting_boxscores'[caughtStealing])
-		formatString: 0
+	measure CS = SUM('Player Hitting'[caughtStealing])
+		formatString: #,0
 		lineageTag: bd32c97a-42bf-486f-bc8f-a11c20e0c7bb
 
 	/// Stolen bases - successful attempts by a baserunner to advance to the next base while the pitcher is throwing to home plate
-	measure 'Sum Stolen Bases' = SUM('mlb_player_batting_boxscores'[stolenBases])
-		formatString: 0
+	measure SB = SUM('Player Hitting'[stolenBases])
+		formatString: #,0
 		lineageTag: 1f079f29-8aae-4a01-86db-8c2f941cfc43
 
 	/// Plate appearances - total number of times a batter completes a turn at bat (includes at-bats, walks, hit by pitch, sacrifices, interference)
-	measure 'Sum Plate Appearances' = SUM('mlb_player_batting_boxscores'[plateAppearances])
-		formatString: 0
+	measure PA = SUM('Player Hitting'[plateAppearances])
+		formatString: #,0
 		lineageTag: a2e401cd-52c7-4910-919a-897367ada167
 
 	/// Left on base - baserunners who remain on base at the end of an inning and do not score
-	measure 'Sum Left On Base' = SUM('mlb_player_batting_boxscores'[leftOnBase])
-		formatString: 0
+	measure LOB = SUM('Player Hitting'[leftOnBase])
+		formatString: #,0
 		lineageTag: 6a3cceba-9031-47b1-92b0-f0f088aa017d
 
 	/// Total bases - sum of all bases gained from hits (1 for single, 2 for double, 3 for triple, 4 for home run)
-	measure 'Sum Total Bases' = SUM('mlb_player_batting_boxscores'[totalBases])
-		formatString: 0
+	measure TB = SUM('Player Hitting'[totalBases])
+		formatString: #,0
 		lineageTag: da58bff7-3236-4ad7-83f6-fb8c2d189a0b
 
 	/// Runs batted in - the number of runs that score as a direct result of a batter's plate appearance (hits, sacrifice flies, fielder's choice, etc.)
-	measure 'RBI''s' = SUM('mlb_player_batting_boxscores'[rbi])
-		formatString: 0
+	measure RBIs = SUM('Player Hitting'[rbi])
+		formatString: #,0
 		lineageTag: a575223b-75f4-41c8-b830-6c709832584f
+
+	/// Batting average - hits divided by at bats, the most fundamental measure of a hitter's success rate and ability to reach base safely via hits.
+	///         "2B", [2B]
+	///     )
+	measure AVG = DIVIDE([H], [AB], 0)
+		formatString: " .000"
+		lineageTag: c252bef3-b411-4e11-bf21-1f0157d656a4
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	/// Sacrifice flies - fly balls hit for outs that allow a baserunner to score, showing a batter's ability to drive in runs even when making an out
+	measure SF = SUM('Player Hitting'[sacFlies])
+		formatString: #,0
+		lineageTag: 6bfe092e-13b0-4860-8779-fc5c9fa766f0
+
+	measure OBP =
+			
+			VAR _Numerator = [H] + [BB] + [HBP]
+			VAR _Denominator = [AB] + [BB] + [HBP] + [SF]
+			RETURN
+			DIVIDE(_Numerator, _Denominator, 0)
+		formatString: .000
+		lineageTag: c750bf01-52ec-4366-b7d9-349da8977803
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	/// Slugging percentage - total bases divided by at bats, measuring a hitter's power and extra-base hitting ability
+	measure SLG = DIVIDE([TB], [AB], 0)
+		formatString: .000
+		lineageTag: 7589a864-23c9-4db1-bdd7-3f03b32aaf5c
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	measure OPS = [OBP] + [SLG]
+		formatString: 0.000
+		lineageTag: 300d5b42-7d30-4c10-afe5-a60a4555fc54
+
+	measure 'AB Avg' = Average('Player Hitting'[atBats])
+		lineageTag: b0e891f7-6cf0-4a71-855a-cbc7fdf7fde8
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure PS
+		lineageTag: e2e0a986-41e8-40f5-8a25-949b9ec6910c
 
 	column gamePk
 		dataType: int64
@@ -161,10 +213,10 @@ table mlb_player_batting_boxscores
 		dataType: int64
 		formatString: 0
 		lineageTag: fc1a1985-35a5-45e6-9e88-919ce734029b
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: batting_order
 
-		annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = User
 
 	column position
 		dataType: string
@@ -196,7 +248,7 @@ table mlb_player_batting_boxscores
 		isHidden
 		formatString: 0
 		lineageTag: 4cf9cd4d-c38f-48d4-b4a3-0c57a68b91c8
-		summarizeBy: none
+		summarizeBy: sum
 		sourceColumn: gamesPlayed
 
 		annotation SummarizationSetBy = Automatic
@@ -206,7 +258,7 @@ table mlb_player_batting_boxscores
 		isHidden
 		formatString: 0
 		lineageTag: 53b9748c-c33a-4439-83d0-404445c09fec
-		summarizeBy: none
+		summarizeBy: sum
 		sourceColumn: flyOuts
 
 		annotation SummarizationSetBy = Automatic
@@ -216,7 +268,7 @@ table mlb_player_batting_boxscores
 		isHidden
 		formatString: 0
 		lineageTag: 3eef573f-fab7-4227-b8af-dc80ba7f2bfd
-		summarizeBy: none
+		summarizeBy: sum
 		sourceColumn: groundOuts
 
 		annotation SummarizationSetBy = Automatic
@@ -226,7 +278,7 @@ table mlb_player_batting_boxscores
 		isHidden
 		formatString: 0
 		lineageTag: be96f1d4-27ae-4d00-9eda-4e63a3c51911
-		summarizeBy: none
+		summarizeBy: sum
 		sourceColumn: airOuts
 
 		annotation SummarizationSetBy = Automatic
@@ -236,7 +288,7 @@ table mlb_player_batting_boxscores
 		isHidden
 		formatString: 0
 		lineageTag: 8e20f947-b86c-40a1-9fd2-bcf6cdfffaaa
-		summarizeBy: none
+		summarizeBy: sum
 		sourceColumn: runs
 
 		annotation SummarizationSetBy = Automatic
@@ -246,7 +298,7 @@ table mlb_player_batting_boxscores
 		isHidden
 		formatString: 0
 		lineageTag: c80469a4-0fb8-4fe8-abb1-4e11618e0b69
-		summarizeBy: none
+		summarizeBy: sum
 		sourceColumn: doubles
 
 		annotation SummarizationSetBy = Automatic
@@ -256,7 +308,7 @@ table mlb_player_batting_boxscores
 		isHidden
 		formatString: 0
 		lineageTag: 47609428-e836-4cad-8a42-61ea2ebddefb
-		summarizeBy: none
+		summarizeBy: sum
 		sourceColumn: triples
 
 		annotation SummarizationSetBy = Automatic
@@ -266,7 +318,7 @@ table mlb_player_batting_boxscores
 		isHidden
 		formatString: 0
 		lineageTag: 15e26a40-72ef-4b49-88f2-6a10289b8f6d
-		summarizeBy: none
+		summarizeBy: sum
 		sourceColumn: homeRuns
 
 		annotation SummarizationSetBy = Automatic
@@ -276,7 +328,7 @@ table mlb_player_batting_boxscores
 		isHidden
 		formatString: 0
 		lineageTag: 59fd4f61-d795-4ab2-97fc-1b5d85ad95cb
-		summarizeBy: none
+		summarizeBy: sum
 		sourceColumn: strikeOuts
 
 		annotation SummarizationSetBy = Automatic
@@ -286,7 +338,7 @@ table mlb_player_batting_boxscores
 		isHidden
 		formatString: 0
 		lineageTag: b05b44ce-745a-41f6-b1cd-e4002846d298
-		summarizeBy: none
+		summarizeBy: sum
 		sourceColumn: baseOnBalls
 
 		annotation SummarizationSetBy = Automatic
@@ -296,7 +348,7 @@ table mlb_player_batting_boxscores
 		isHidden
 		formatString: 0
 		lineageTag: 6328ff50-4046-4981-a97f-b932748e24e0
-		summarizeBy: none
+		summarizeBy: sum
 		sourceColumn: intentionalWalks
 
 		annotation SummarizationSetBy = Automatic
@@ -306,7 +358,7 @@ table mlb_player_batting_boxscores
 		isHidden
 		formatString: 0
 		lineageTag: d7bf64b8-f887-4785-bc0b-6284ed906ea6
-		summarizeBy: none
+		summarizeBy: sum
 		sourceColumn: hits
 
 		annotation SummarizationSetBy = Automatic
@@ -316,7 +368,7 @@ table mlb_player_batting_boxscores
 		isHidden
 		formatString: 0
 		lineageTag: d7c04bde-9c0f-4353-8567-b0f9c7ecfefb
-		summarizeBy: none
+		summarizeBy: sum
 		sourceColumn: hitByPitch
 
 		annotation SummarizationSetBy = Automatic
@@ -326,7 +378,7 @@ table mlb_player_batting_boxscores
 		isHidden
 		formatString: 0
 		lineageTag: a9f71896-0b77-476c-8ddf-5785ffe0c845
-		summarizeBy: none
+		summarizeBy: sum
 		sourceColumn: atBats
 
 		annotation SummarizationSetBy = Automatic
@@ -336,7 +388,7 @@ table mlb_player_batting_boxscores
 		isHidden
 		formatString: 0
 		lineageTag: 88b67619-5b76-4ad1-83bf-876d71c456df
-		summarizeBy: none
+		summarizeBy: sum
 		sourceColumn: caughtStealing
 
 		annotation SummarizationSetBy = Automatic
@@ -346,7 +398,7 @@ table mlb_player_batting_boxscores
 		isHidden
 		formatString: 0
 		lineageTag: 1fba5385-f461-47ee-b68d-187c527e40b6
-		summarizeBy: none
+		summarizeBy: sum
 		sourceColumn: stolenBases
 
 		annotation SummarizationSetBy = Automatic
@@ -382,7 +434,7 @@ table mlb_player_batting_boxscores
 		isHidden
 		formatString: 0
 		lineageTag: e01ce500-7fbc-41ce-a652-f63113c7bbe1
-		summarizeBy: none
+		summarizeBy: sum
 		sourceColumn: plateAppearances
 
 		annotation SummarizationSetBy = Automatic
@@ -392,7 +444,7 @@ table mlb_player_batting_boxscores
 		isHidden
 		formatString: 0
 		lineageTag: 99096023-8c17-4ac5-a701-79d504bd8915
-		summarizeBy: none
+		summarizeBy: sum
 		sourceColumn: totalBases
 
 		annotation SummarizationSetBy = Automatic
@@ -402,7 +454,7 @@ table mlb_player_batting_boxscores
 		isHidden
 		formatString: 0
 		lineageTag: 4c46e3cf-d73b-4569-afe4-b1186d30db29
-		summarizeBy: none
+		summarizeBy: sum
 		sourceColumn: rbi
 
 		annotation SummarizationSetBy = Automatic
@@ -412,7 +464,7 @@ table mlb_player_batting_boxscores
 		isHidden
 		formatString: 0
 		lineageTag: 4453f0a0-412d-4944-9556-be09e1de72e0
-		summarizeBy: none
+		summarizeBy: sum
 		sourceColumn: leftOnBase
 
 		annotation SummarizationSetBy = Automatic
@@ -506,7 +558,7 @@ table mlb_player_batting_boxscores
 
 		annotation UnderlyingDateTimeDataType = Date
 
-	partition mlb_player_batting_boxscores = m
+	partition 'Player Hitting' = m
 		mode: import
 		source =
 				let
@@ -515,6 +567,8 @@ table mlb_player_batting_boxscores
 				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"gamePk", Int64.Type}, {"team", type text}, {"team_type", type text}, {"player_id", Int64.Type}, {"player_name", type text}, {"batting_order", Int64.Type}, {"position", type text}, {"position_code", Int64.Type}, {"jersey_number", type text}, {"gamesPlayed", Int64.Type}, {"flyOuts", Int64.Type}, {"groundOuts", Int64.Type}, {"airOuts", Int64.Type}, {"runs", Int64.Type}, {"doubles", Int64.Type}, {"triples", Int64.Type}, {"homeRuns", Int64.Type}, {"strikeOuts", Int64.Type}, {"baseOnBalls", Int64.Type}, {"intentionalWalks", Int64.Type}, {"hits", Int64.Type}, {"hitByPitch", Int64.Type}, {"atBats", Int64.Type}, {"caughtStealing", Int64.Type}, {"stolenBases", Int64.Type}, {"stolenBasePercentage", type text}, {"groundIntoDoublePlay", Int64.Type}, {"groundIntoTriplePlay", Int64.Type}, {"plateAppearances", Int64.Type}, {"totalBases", Int64.Type}, {"rbi", Int64.Type}, {"leftOnBase", Int64.Type}, {"sacBunts", Int64.Type}, {"sacFlies", Int64.Type}, {"catchersInterference", Int64.Type}, {"pickoffs", Int64.Type}, {"atBatsPerHomeRun", type text}, {"popOuts", Int64.Type}, {"lineOuts", Int64.Type}, {"summary", type text}, {"note", type text}, {"date", type date}})
 				in
 				    #"Changed Type"
+
+	changedProperty = Name
 
 	annotation PBI_NavigationStepName = Navigation
 

@@ -1,8 +1,8 @@
-table game_schedule
+table 'Game Schedule'
 	lineageTag: 0f340865-ab89-4b21-8f32-79330d98a8ea
 
 	/// Total number of scheduled games in the dataset
-	measure Measure = count(game_schedule[gamePk])
+	measure Games = count('Game Schedule'[gamePk])
 		formatString: 0
 		lineageTag: 705fb657-cba0-4d2f-8c7a-15d32bf3ddda
 
@@ -561,7 +561,7 @@ table game_schedule
 
 		annotation SummarizationSetBy = Automatic
 
-	partition game_schedule = m
+	partition 'Game Schedule' = m
 		mode: import
 		source =
 				let
@@ -570,6 +570,8 @@ table game_schedule
 				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"officialDate", type date}, {"gameDate", type datetime}, {"gamePk", Int64.Type}, {"gameGuid", type text}, {"link", type text}, {"gameType", type text}, {"season", Int64.Type}, {"isTie", type logical}, {"gameNumber", Int64.Type}, {"publicFacing", type logical}, {"doubleHeader", type text}, {"gamedayType", type text}, {"tiebreaker", type text}, {"calendarEventID", type text}, {"seasonDisplay", Int64.Type}, {"dayNight", type text}, {"scheduledInnings", Int64.Type}, {"reverseHomeAwayStatus", type logical}, {"inningBreakLength", Int64.Type}, {"gamesInSeries", Int64.Type}, {"seriesGameNumber", Int64.Type}, {"seriesDescription", type text}, {"recordSource", type text}, {"ifNecessary", type text}, {"ifNecessaryDescription", type text}, {"status.abstractGameState", type text}, {"status.codedGameState", type text}, {"status.detailedState", type text}, {"status.statusCode", type text}, {"status.startTimeTBD", type logical}, {"status.abstractGameCode", type text}, {"teams.away.leagueRecord.wins", Int64.Type}, {"teams.away.leagueRecord.losses", Int64.Type}, {"teams.away.leagueRecord.pct", type number}, {"teams.away.score", Int64.Type}, {"teams.away.team.id", Int64.Type}, {"teams.away.team.name", type text}, {"teams.away.team.link", type text}, {"teams.away.isWinner", type logical}, {"teams.away.splitSquad", type logical}, {"teams.away.seriesNumber", Int64.Type}, {"teams.home.leagueRecord.wins", Int64.Type}, {"teams.home.leagueRecord.losses", Int64.Type}, {"teams.home.leagueRecord.pct", type number}, {"teams.home.score", Int64.Type}, {"teams.home.team.id", Int64.Type}, {"teams.home.team.name", type text}, {"teams.home.team.link", type text}, {"teams.home.isWinner", type logical}, {"teams.home.splitSquad", type logical}, {"teams.home.seriesNumber", Int64.Type}, {"venue.id", Int64.Type}, {"venue.name", type text}, {"venue.link", type text}, {"content.link", type text}, {"description", type text}, {"rescheduleDate", type text}, {"rescheduleGameDate", type text}, {"status.reason", type text}, {"rescheduledFrom", type text}, {"rescheduledFromDate", type text}, {"resumeDate", type text}, {"resumeGameDate", type text}, {"resumedFrom", type text}, {"resumedFromDate", type text}})
 				in
 				    #"Changed Type"
+
+	changedProperty = Name
 
 	annotation PBI_NavigationStepName = Navigation
 

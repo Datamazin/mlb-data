@@ -1,9 +1,12 @@
 relationship 1e791ecd-bd14-32cb-f8e5-e0ae94047ba6
-	crossFilteringBehavior: bothDirections
-	fromColumn: mlb_player_batting_boxscores.gamePk
-	toColumn: game_schedule.gamePk
+	fromColumn: 'Player Hitting'.gamePk
+	toColumn: 'Game Schedule'.gamePk
 
 relationship dc28d5b3-8e25-0181-5b0a-377a4c1d2abc
-	fromColumn: mlb_player_batting_boxscores.player_id
-	toColumn: player_info.id
+	fromColumn: 'Player Hitting'.player_id
+	toColumn: 'Player Info'.id
+
+relationship 7ccffff7-e97e-c8ae-7f15-51a74438e484
+	fromColumn: 'Player Hitting'.date
+	toColumn: Date.Date
 

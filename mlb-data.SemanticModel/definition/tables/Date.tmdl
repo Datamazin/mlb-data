@@ -1,0 +1,152 @@
+/// Date dimension table for time intelligence calculations
+table Date
+	lineageTag: d036b305-f2c6-4717-8e7f-6d730c080fb9
+
+	column Date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 8afa8901-d780-47fd-9df1-dcf685a1563a
+		summarizeBy: none
+		sourceColumn: Date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Year
+		dataType: int64
+		formatString: 0
+		lineageTag: cacc63b9-32bd-451e-8a2a-d838eadd4f1e
+		summarizeBy: none
+		sourceColumn: Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quarter
+		dataType: int64
+		formatString: 0
+		lineageTag: ce07ba46-0274-4b54-b77c-c376d161f351
+		summarizeBy: none
+		sourceColumn: Quarter
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month
+		dataType: int64
+		formatString: 0
+		lineageTag: aa0de068-bdb5-48fd-9c5d-4b649c21ca7d
+		summarizeBy: none
+		sourceColumn: Month
+
+		annotation SummarizationSetBy = Automatic
+
+	column MonthName
+		dataType: string
+		lineageTag: 4dbacf05-b9a4-4fde-9328-bfd374b8e3d9
+		summarizeBy: none
+		sourceColumn: MonthName
+
+		annotation SummarizationSetBy = Automatic
+
+	column Day
+		dataType: int64
+		formatString: 0
+		lineageTag: 88d77eb6-2d3c-4698-8db3-2daabb54c1bc
+		summarizeBy: none
+		sourceColumn: Day
+
+		annotation SummarizationSetBy = Automatic
+
+	column DayOfWeek
+		dataType: int64
+		formatString: 0
+		lineageTag: e729866c-9d14-4dd5-a7d1-e3a0eda7848e
+		summarizeBy: none
+		sourceColumn: DayOfWeek
+
+		annotation SummarizationSetBy = Automatic
+
+	column DayName
+		dataType: string
+		lineageTag: f72c967b-133d-48cd-9b40-254647cfebf0
+		summarizeBy: none
+		sourceColumn: DayName
+
+		annotation SummarizationSetBy = Automatic
+
+	column WeekOfYear
+		dataType: int64
+		formatString: 0
+		lineageTag: 055788b9-9113-477a-803e-064f3937e542
+		summarizeBy: none
+		sourceColumn: WeekOfYear
+
+		annotation SummarizationSetBy = Automatic
+
+	column YearMonth
+		dataType: string
+		lineageTag: c1d41c0f-2424-4d57-affc-125c690287eb
+		summarizeBy: none
+		sourceColumn: YearMonth
+
+		annotation SummarizationSetBy = Automatic
+
+	column YearQuarter
+		dataType: string
+		lineageTag: cd86460b-eb52-4e70-8a18-5628231460f4
+		summarizeBy: none
+		sourceColumn: YearQuarter
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Date = m
+		mode: import
+		source = ```
+				let
+				    // Define start and end dates for MLB season
+				    StartDate = #date(2025, 3, 1),
+				    EndDate = #date(2025, 12, 31),
+				    
+				    // Generate list of dates
+				    NumberOfDays = Duration.Days(EndDate - StartDate) + 1,
+				    DateList = List.Dates(StartDate, NumberOfDays, #duration(1, 0, 0, 0)),
+				    
+				    // Convert to table
+				    TableFromList = Table.FromList(DateList, Splitter.SplitByNothing(), {"Date"}, null, ExtraValues.Error),
+				    
+				    // Change type to date
+				    ChangedType = Table.TransformColumnTypes(TableFromList, {{"Date", type date}}),
+				    
+				    // Add Year
+				    AddYear = Table.AddColumn(ChangedType, "Year", each Date.Year([Date]), Int64.Type),
+				    
+				    // Add Quarter
+				    AddQuarter = Table.AddColumn(AddYear, "Quarter", each Date.QuarterOfYear([Date]), Int64.Type),
+				    
+				    // Add Month
+				    AddMonth = Table.AddColumn(AddQuarter, "Month", each Date.Month([Date]), Int64.Type),
+				    
+				    // Add Month Name
+				    AddMonthName = Table.AddColumn(AddMonth, "MonthName", each Date.MonthName([Date]), type text),
+				    
+				    // Add Day
+				    AddDay = Table.AddColumn(AddMonthName, "Day", each Date.Day([Date]), Int64.Type),
+				    
+				    // Add Day of Week (1=Monday, 7=Sunday)
+				    AddDayOfWeek = Table.AddColumn(AddDay, "DayOfWeek", each Date.DayOfWeek([Date], Day.Monday) + 1, Int64.Type),
+				    
+				    // Add Day Name
+				    AddDayName = Table.AddColumn(AddDayOfWeek, "DayName", each Date.DayOfWeekName([Date]), type text),
+				    
+				    // Add Week of Year
+				    AddWeekOfYear = Table.AddColumn(AddDayName, "WeekOfYear", each Date.WeekOfYear([Date], Day.Monday), Int64.Type),
+				    
+				    // Add Year-Month for sorting
+				    AddYearMonth = Table.AddColumn(AddWeekOfYear, "YearMonth", each Text.From([Year]) & "-" & Text.PadStart(Text.From([Month]), 2, "0"), type text),
+				    
+				    // Add Year-Quarter
+				    AddYearQuarter = Table.AddColumn(AddYearMonth, "YearQuarter", each Text.From([Year]) & " Q" & Text.From([Quarter]), type text)
+				in
+				    AddYearQuarter
+				```
+

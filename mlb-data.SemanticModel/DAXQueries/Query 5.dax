@@ -1,0 +1,7 @@
+DEFINE
+    MEASURE 'mlb_player_batting_boxscores'[2B] = SUM('mlb_player_batting_boxscores'[doubles])
+
+EVALUATE
+    SUMMARIZECOLUMNS(
+        "2B", [2B]
+    )

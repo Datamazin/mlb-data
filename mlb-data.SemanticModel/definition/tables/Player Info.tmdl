@@ -1,4 +1,4 @@
-table player_info
+table 'Player Info'
 	lineageTag: 5a117058-adfd-46c0-a4db-e3b17ec6446e
 
 	column id
@@ -369,7 +369,7 @@ table player_info
 
 		annotation SummarizationSetBy = Automatic
 
-	partition player_info = m
+	partition 'Player Info' = m
 		mode: import
 		source =
 				let
@@ -378,6 +378,8 @@ table player_info
 				    #"Renamed Columns" = Table.RenameColumns(#"Promoted Headers",{{"fullName", "Player"}, {"primaryPosition.abbreviation", "P"}})
 				in
 				    #"Renamed Columns"
+
+	changedProperty = Name
 
 	annotation PBI_NavigationStepName = Navigation
 

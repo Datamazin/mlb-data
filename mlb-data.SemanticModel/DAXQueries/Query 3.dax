@@ -1,0 +1,7 @@
+DEFINE
+    MEASURE 'game_schedule'[Games] = count(game_schedule[gamePk])
+
+EVALUATE
+    SUMMARIZECOLUMNS(
+        "Games", [Games]
+    )

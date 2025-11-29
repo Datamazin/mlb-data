@@ -1,0 +1,7 @@
+DEFINE
+    MEASURE 'Player Hitting'[2B] = SUM('Player Hitting'[doubles])
+
+EVALUATE
+    SUMMARIZECOLUMNS(
+        "2B", [2B]
+    )
